@@ -5,6 +5,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProductDTO {
     private Long id;
 
@@ -21,12 +25,17 @@ public class ProductDTO {
 
     private String imgUrl;
 
-    public ProductDTO(Long id, String name, String description, Double price, String imgUrl) {
+    private Instant date;
+
+    private List<CategoryDTO> categoryDTOList = new ArrayList<>();
+
+    public ProductDTO(Long id, String name, String description, Double price, String imgUrl, Instant date) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.imgUrl = imgUrl;
+        this.date = date;
     }
 
     public ProductDTO(Product entity) {
@@ -35,6 +44,7 @@ public class ProductDTO {
         description = entity.getDescription();
         price = entity.getPrice();
         imgUrl = entity.getImgUrl();
+        date = entity.getDate();
     }
 
     public Long getId() {
@@ -55,5 +65,13 @@ public class ProductDTO {
 
     public String getImgUrl() {
         return imgUrl;
+    }
+
+    public Instant getDate() {
+        return date;
+    }
+
+    public List<CategoryDTO> getCategoryDTOList() {
+        return categoryDTOList;
     }
 }

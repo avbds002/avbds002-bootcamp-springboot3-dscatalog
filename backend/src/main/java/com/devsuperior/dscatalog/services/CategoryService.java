@@ -5,6 +5,7 @@ import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.repositories.CategoryRepository;
 import com.devsuperior.dscatalog.services.exceptions.DatabaseException;
 import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -47,8 +48,8 @@ public class CategoryService {
             entity = categoryRepository.save(entity);
             return new CategoryDTO(entity);
         }
-        catch (ResourceNotFoundException e) {
-            throw new ResourceNotFoundException("ID NOT FOUND: " + id);
+        catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("ENTITY NOT FOUND CANNOT UPDATE");
         }
     }
 
